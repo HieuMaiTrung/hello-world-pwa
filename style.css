@@ -48,6 +48,38 @@ body {
     height: 80px;
     border-radius: 50%;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto 24px;
+    box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
+}
+
+.globe-icon {
+    color: #c7d2fe;
+    animation: spin 20s linear infinite;
+}
+
+h1 {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    background: linear-gradient(to right, #fff, #c7d2fe);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+p {
+    font-size: 1.1rem;
+    color: #a5b4fc;
+    margin-bottom: 32px;
+    line-height: 1.5;
+}
+
+.btn {
+    background: var(--primary-color);
+    color: white;
+    border: none;
     padding: 12px 24px;
     border-radius: 12px;
     font-size: 1rem;
@@ -121,20 +153,89 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
 }
 
-.btn-small:hover {
-    background: var(--secondary-color);
+.close:hover,
+.close:focus {
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
 }
 
-@keyframes slideIn {
-    from {
-        transform: translateY(100px);
-        opacity: 0;
-    }
+.secondary-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    margin-top: 12px;
+}
 
-    to {
-        transform: translateY(0);
-        opacity: 1;
-    }
+.secondary-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.form-group {
+    margin-bottom: 16px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 8px;
+    color: #c7d2fe;
+    font-size: 0.9rem;
+}
+
+input,
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid var(--glass-border);
+    background: rgba(255, 255, 255, 0.05);
+    color: white;
+    font-family: inherit;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input:focus,
+select:focus {
+    border-color: var(--secondary-color);
+    background: rgba(255, 255, 255, 0.1);
+}
+
+select option {
+    background: #1e1b4b;
+    color: white;
+}
+
+.divider {
+    border: 0;
+    height: 1px;
+    background: var(--glass-border);
+    margin: 24px 0;
+}
+
+.small-text {
+    font-size: 0.8rem;
+    color: #818cf8;
+    margin-bottom: 12px;
+}
+
+.button-group {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.google-btn {
+    background: #ffffff;
+    color: #1f2937;
+}
+
+.google-btn:hover {
+    background: #f3f4f6;
 }

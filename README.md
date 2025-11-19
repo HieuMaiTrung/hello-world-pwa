@@ -23,5 +23,34 @@ A cross-platform "Hello World" application built as a Progressive Web App (PWA).
 4. You should see the app!
 5. To install: Tap the **three dots menu** (⋮) -> **Add to Home screen** (or "Install App").
 
+## How to Uninstall
+Since this is a PWA, it installs like a native app but is easier to remove.
+
+- **Android**: Long-press the app icon on your home screen -> Tap **App Info** (or 'i') -> Tap **Uninstall**.
+- **iOS**: Long-press the app icon -> Tap **Remove App** -> Tap **Delete App**.
+- **Desktop (Chrome/Edge)**: Open the app -> Click the three dots/menu in the title bar -> Select **Uninstall Hello World**.
+
+## How Updates Work
+The app updates automatically using modern PWA standards:
+1.  **Check**: Every time you open the app, it checks the **server where you hosted it** (e.g., your computer, Netlify, or GitHub) to see if `sw.js` has changed.
+2.  **Download**: If there's a new version, it downloads in the background.
+3.  **Notify**: You will see a "New version available!" pop-up.
+4.  **Install**: When you click "Update", the new version activates and the app reloads.
+
+## Google Drive Backup Setup
+To enable "Backup to Drive", you must set up a Google Cloud Project:
+
+1.  Go to [Google Cloud Console](https://console.cloud.google.com/).
+2.  Create a new project.
+3.  Enable the **Google Drive API**.
+4.  Go to **Credentials** -> **Create Credentials** -> **OAuth client ID**.
+    - Application type: **Web application**.
+    - Authorized JavaScript origins: `http://localhost:8000` (or your Netlify/GitHub URL).
+5.  Copy the **Client ID**.
+6.  Create an **API Key** in Credentials.
+7.  Open `index.html` and replace:
+    - `YOUR_CLIENT_ID_HERE` with your Client ID.
+    - `YOUR_API_KEY_HERE` with your API Key.
+
 ## Note
 For the best experience, serve this folder using a local server (e.g., `python -m http.server` or VS Code Live Server) because some PWA features (like Service Workers) require HTTPS or localhost to work correctly. Opening the file directly (`file://`) might restrict some features.
