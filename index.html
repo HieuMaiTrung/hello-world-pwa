@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +12,20 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;500;700&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div class="container">
         <div class="card">
             <div class="icon-wrapper">
-                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="globe-icon"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none"
+                    stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                    class="globe-icon">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="2" y1="12" x2="22" y2="12"></line>
+                    <path
+                        d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z">
+                    </path>
+                </svg>
             </div>
             <h1>Hello World</h1>
             <p>Welcome to your cross-platform experience.</p>
@@ -23,14 +33,49 @@
         </div>
     </div>
 
+    <div id="updateToast" class="toast" hidden>
+        <p>New version available!</p>
+        <button id="updateBtn" class="btn-small">Update</button>
+    </div>
+
     <script>
+        let newWorker;
+
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
-                navigator.serviceWorker.register('./sw.js')
-                    .then(registration => console.log('SW registered: ', registration))
-                    .catch(registrationError => console.log('SW registration failed: ', registrationError));
+                navigator.serviceWorker.register('./sw.js').then(registration => {
+                    console.log('SW registered: ', registration);
+
+                    registration.addEventListener('updatefound', () => {
+                        newWorker = registration.installing;
+                        newWorker.addEventListener('statechange', () => {
+                            if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                                showUpdateToast();
+                            }
+                        });
+                    });
+                }).catch(registrationError => console.log('SW registration failed: ', registrationError));
+            });
+
+            let refreshing;
+            navigator.serviceWorker.addEventListener('controllerchange', () => {
+                if (refreshing) return;
+                window.location.reload();
+                refreshing = true;
             });
         }
+
+        function showUpdateToast() {
+            const toast = document.getElementById('updateToast');
+            toast.hidden = false;
+        }
+
+        document.getElementById('updateBtn').addEventListener('click', () => {
+            if (newWorker) {
+                newWorker.postMessage({ action: 'skipWaiting' });
+            }
+            document.getElementById('updateToast').hidden = true;
+        });
 
         let deferredPrompt;
         const installBtn = document.getElementById('installBtn');
@@ -51,4 +96,5 @@
         });
     </script>
 </body>
+
 </html>

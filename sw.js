@@ -1,4 +1,4 @@
-const CACHE_NAME = 'hello-world-v1';
+const CACHE_NAME = 'hello-world-v2';
 const ASSETS = [
     './',
     './index.html',
@@ -13,6 +13,12 @@ self.addEventListener('install', (e) => {
             return cache.addAll(ASSETS);
         })
     );
+});
+
+self.addEventListener('message', (event) => {
+    if (event.data && event.data.action === 'skipWaiting') {
+        self.skipWaiting();
+    }
 });
 
 self.addEventListener('fetch', (e) => {

@@ -48,37 +48,6 @@ body {
     height: 80px;
     border-radius: 50%;
     display: flex;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto 24px;
-    box-shadow: 0 0 20px rgba(79, 70, 229, 0.4);
-}
-
-.globe-icon {
-    color: #c7d2fe;
-    animation: spin 20s linear infinite;
-}
-
-h1 {
-    font-size: 2.5rem;
-    font-weight: 700;
-    margin-bottom: 12px;
-    background: linear-gradient(to right, #fff, #c7d2fe);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-}
-
-p {
-    font-size: 1.1rem;
-    color: #a5b4fc;
-    margin-bottom: 32px;
-    line-height: 1.5;
-}
-
-.btn {
-    background: var(--primary-color);
-    color: white;
-    border: none;
     padding: 12px 24px;
     border-radius: 12px;
     font-size: 1rem;
@@ -100,12 +69,72 @@ p {
 }
 
 @keyframes float {
-    0% { transform: translateY(0px); }
-    50% { transform: translateY(-10px); }
-    100% { transform: translateY(0px); }
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
 }
 
 @keyframes spin {
-    from { transform: rotate(0deg); }
-    to { transform: rotate(360deg); }
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.toast {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid var(--glass-border);
+    padding: 16px 24px;
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    animation: slideIn 0.5s ease-out;
+    z-index: 1000;
+}
+
+.btn-small {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-family: inherit;
+}
+
+.btn-small:hover {
+    background: var(--secondary-color);
+}
+
+@keyframes slideIn {
+    from {
+        transform: translateY(100px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
 }
